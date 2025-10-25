@@ -10,8 +10,9 @@ projects.each { project ->
 
         // Build trigger (every 20 minutes)
         triggers {
-            cron('H/20 * * * *')
-        }
+          cron('* * * * *')
+         }
+
 
         // Log rotation: keep 5 builds for 5 days
         logRotator(5, 5)
