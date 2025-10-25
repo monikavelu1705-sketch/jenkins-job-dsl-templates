@@ -3,13 +3,17 @@ def projects = ['frontend-app', 'backend-service', 'documentation']
 projects.each { project ->
     job("${project}-build-job") {
         steps {
-            // Windows batch commands instead of shell
+            // Use Windows batch commands
             batchFile("echo Starting standardized build for project: ${project}")
             batchFile("echo Running standard tests...")
         }
+
+        // Build trigger (every 20 minutes)
         triggers {
-            cron('H/20 * * * *') // This is okay on Windows too
+            cron('H/20 * * * *')
         }
-        logRotator(5, 5) // Keep 5 builds for 5 days
+
+        // Log rotation: keep 5 builds for 5 days
+        logRotator(5, 5)
     }
 }
